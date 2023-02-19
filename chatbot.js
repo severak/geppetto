@@ -12,9 +12,22 @@ function handleUserInput(event) {
 }
 
 function generateResponse(inputText) {
-  // Add your chatbot logic here to generate a response based on the user's input
-  return "I'm sorry, I don't understand.";
-}
+    let responseText;
+    switch (inputText.toLowerCase()) {
+      case 'hello':
+        responseText = 'Hello there!';
+        break;
+      case 'how are you?':
+        responseText = 'I am doing well, thank you!';
+        break;
+      case 'what is your name?':
+        responseText = "My name is Chatbot. What's yours?";
+        break;
+      default:
+        responseText = "I'm sorry, I don't understand.";
+    }
+    return responseText;
+  }
 
 function displayMessage(sender, message) {
   const div = document.createElement('div');
