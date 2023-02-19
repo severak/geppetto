@@ -44,6 +44,24 @@ if (matches && matches.length === 4) {
 throw new Error('Invalid mathematical question.');
 }
 
+function answerAIClichéQuestions(inputText) {
+    const question = inputText.toLowerCase();
+  
+    if (question.includes('what is ai') || question.includes('what is artificial intelligence')) {
+      return 'Artificial intelligence, or AI, refers to the development of computer systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, decision-making, and language translation.';
+    }
+  
+    if (question.includes('why is ai important')) {
+      return 'AI is important because it has the potential to transform many industries, including healthcare, finance, transportation, and more. With AI, we can analyze and process large amounts of data more quickly and accurately, automate repetitive tasks, and develop new products and services that can improve our lives.';
+    }
+  
+    if (question.includes('what are the types of ai')) {
+      return 'There are three main types of AI: (1) Narrow or weak AI, which is designed to perform a specific task, (2) General or strong AI, which can perform any intellectual task that a human can, and (3) Artificial superintelligence, which is hypothetical and refers to an AI that surpasses human intelligence in every possible way.';
+    }
+  
+    return null;
+  }
+
 function generateResponse(inputText) {
     const lowerCaseInput = inputText.toLowerCase();
     let responseText = '';
@@ -71,12 +89,18 @@ function generateResponse(inputText) {
       responseText = 'Goodbye!';
     } else if (lowerCaseInput.includes('+') || lowerCaseInput.includes('-') || lowerCaseInput.includes('*') || lowerCaseInput.includes('/')) {
         try {
-          const result = eval(inputText);
-          responseText = `The result is ${result}.`;
+          responseText = solveMathematicalQuestion(lowerCaseInput);
         } catch (error) {
           responseText = 'Sorry, I am not able to solve that mathematical question.';
         }
     } else {
+        const clicheResponse = answerAIClichéQuestions(inputText);
+        if (clicheResponse) {
+            return clicheResponse;
+        }
+
+
+
       // If no pattern is matched, generate a generic response
       const genericResponses = [
         "I'm sorry, I don't understand.",
