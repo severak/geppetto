@@ -102,6 +102,28 @@ function answerAIClichéQuestions(inputText) {
     return null;
   }
 
+  function answerMovieQuestions(inputText) {
+    const text = inputText.toLowerCase();
+  
+    if (text.includes('what movies are playing now?')) {
+      return "I'm sorry, I don't have access to real-time movie schedules. But I can recommend some popular movies or tell you about specific movies if you're interested.";
+    }
+  
+    if (text.includes('can you recommend a good movie?')) {
+      return "Sure! If you like action movies, I recommend 'John Wick'. If you prefer romantic comedies, try 'The Big Sick'. If you're in the mood for a classic, you can't go wrong with 'Casablanca'.";
+    }
+  
+    if (text.includes('what is the plot of inception?')) {
+      return "Inception is a science fiction movie directed by Christopher Nolan. The movie follows a team of thieves who enter people's dreams in order to plant an idea in their subconscious. It's a complex and thrilling movie that's definitely worth watching!";
+    }
+  
+    if (text.includes('who won the best picture oscar last year?')) {
+      return "The last Best Picture Oscar was won by 'Nomadland'. The movie is a poignant and thought-provoking exploration of modern American life.";
+    }
+  
+    return null;
+  }
+
 function generateResponse(inputText) {
     const lowerCaseInput = inputText.toLowerCase();
     let responseText = '';
@@ -149,6 +171,10 @@ function generateResponse(inputText) {
             return sportResponse;
         }
 
+        const movieAnswer = answerMovieQuestions(inputText);
+        if (movieAnswer) {
+            return movieAnswer;
+        }
 
 
       // If no pattern is matched, generate a generic response
