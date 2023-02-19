@@ -80,6 +80,28 @@ function answerAIClichéQuestions(inputText) {
     return null;
   } 
 
+  function answerSportsQuestions(inputText) {
+    const text = inputText.toLowerCase();
+  
+    if (text.includes('who won the last super bowl?')) {
+      return "I'm not sure. I don't really keep up with sports scores. Would you like me to look it up for you?";
+    }
+  
+    if (text.includes('do you like basketball?')) {
+      return "As an AI language model, I don't have personal preferences. However, I can answer questions about basketball rules and history if you'd like.";
+    }
+  
+    if (text.includes('what is your favorite sport?')) {
+      return "As an AI language model, I don't have personal preferences, but I can discuss a variety of sports if you'd like.";
+    }
+  
+    if (text.includes('tell me about the world cup')) {
+      return "The World Cup is a quadrennial international soccer tournament that involves teams from countries all over the world. The tournament is highly competitive and popular, and many consider it the pinnacle of soccer achievement.";
+    }
+  
+    return null;
+  }
+
 function generateResponse(inputText) {
     const lowerCaseInput = inputText.toLowerCase();
     let responseText = '';
@@ -120,6 +142,11 @@ function generateResponse(inputText) {
         const politicsResponse = answerPoliticalQuestions(inputText);
         if (politicsResponse) {
             return politicsResponse;
+        }
+
+        const sportResponse = answerSportsQuestions(inputText);
+        if (sportResponse) {
+            return sportResponse;
         }
 
 
