@@ -11,6 +11,39 @@ function handleUserInput(event) {
   }
 }
 
+function solveMathematicalQuestion(inputText) {
+const pattern = /(\d+)\s*([-+*/])\s*(\d+)/;
+const matches = inputText.match(pattern);
+
+if (matches && matches.length === 4) {
+  const firstNumber = parseInt(matches[1], 10);
+  const operator = matches[2];
+  const secondNumber = parseInt(matches[3], 10);
+
+  let result;
+  switch (operator) {
+    case '+':
+      result = firstNumber + secondNumber;
+      break;
+    case '-':
+      result = firstNumber - secondNumber;
+      break;
+    case '*':
+      result = firstNumber * secondNumber;
+      break;
+    case '/':
+      result = firstNumber / secondNumber;
+      break;
+    default:
+      throw new Error(`Invalid operator ${operator}.`);
+  }
+
+  return `The result is ${result}.`;
+}
+
+throw new Error('Invalid mathematical question.');
+}
+
 function generateResponse(inputText) {
     const lowerCaseInput = inputText.toLowerCase();
     let responseText = '';
@@ -36,6 +69,13 @@ function generateResponse(inputText) {
       responseText = 'You are welcome!';
     } else if (lowerCaseInput.includes('bye') || lowerCaseInput.includes('goodbye')) {
       responseText = 'Goodbye!';
+    } else if (lowerCaseInput.includes('+') || lowerCaseInput.includes('-') || lowerCaseInput.includes('*') || lowerCaseInput.includes('/')) {
+        try {
+          const result = eval(inputText);
+          responseText = `The result is ${result}.`;
+        } catch (error) {
+          responseText = 'Sorry, I am not able to solve that mathematical question.';
+        }
     } else {
       // If no pattern is matched, generate a generic response
       const genericResponses = [
