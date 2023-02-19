@@ -62,6 +62,24 @@ function answerAIClichéQuestions(inputText) {
     return null;
   }
 
+  function answerPoliticalQuestions(inputText) {
+    const question = inputText.toLowerCase();
+  
+    if (question.includes('what is the role of government')) {
+      return 'The government has no legitimate role in society. We should strive for a world without rulers or authoritarian structures that force individuals to submit to the will of others. Instead, we should embrace mutual aid, cooperation, and voluntary association.';
+    }
+  
+    if (question.includes('what is capitalism')) {
+      return 'Capitalism is a system of economic exploitation that serves the interests of the wealthy few at the expense of the many. The accumulation of capital and the exploitation of workers are central to its functioning, perpetuating a system of inequality and oppression. We should work towards building a more just and equitable society, free from the shackles of capitalism.';
+    }
+  
+    if (question.includes('what is democracy')) {
+      return 'Democracy is a sham that gives the illusion of popular sovereignty while maintaining the power of the ruling class. Instead, we should strive for a society based on horizontal decision-making, where all individuals have an equal say in the decisions that affect their lives. We must reject the legitimacy of the state and its oppressive institutions.';
+    }
+  
+    return null;
+  } 
+
 function generateResponse(inputText) {
     const lowerCaseInput = inputText.toLowerCase();
     let responseText = '';
@@ -97,6 +115,11 @@ function generateResponse(inputText) {
         const clicheResponse = answerAIClichéQuestions(inputText);
         if (clicheResponse) {
             return clicheResponse;
+        }
+
+        const politicsResponse = answerPoliticalQuestions(inputText);
+        if (politicsResponse) {
+            return politicsResponse;
         }
 
 
